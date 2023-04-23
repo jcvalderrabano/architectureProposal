@@ -4,4 +4,6 @@ export class CreatePersonDto {
   lastName: string;
   mote: string;
   age: number;
+  cardNumber: string;
+  slug: string;
 }

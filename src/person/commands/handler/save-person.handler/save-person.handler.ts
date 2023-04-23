@@ -8,14 +8,22 @@ import { PersonLectura } from "src/person/entities/personLectura.entity";
 export class SavePersonHandler implements ICommandHandler<SavePersonCommand> {
  
     constructor(
-        @InjectRepository(PersonLectura) private personRepo: Repository<PersonLectura>,
+        @InjectRepository(PersonLectura) private personLecturaRepo: Repository<PersonLectura>,
       ) {}
     async execute(command: SavePersonCommand) {
-        console.log('Crear');  
-        var person = new PersonLectura();
+        const personfound = await this.personLecturaRepo.findOne({ where: {idPerson : command.id}});
+        const person = new PersonLectura();
+        person.idPerson = command.id;
         person.age = command.age;
         person.fullName = command.fullName;
         person.mote = command.mote;
-        await this.personRepo.insert(person);
+        person.idPaymentMehod = command.idPaymentMehod;
+        person.cardNumber = command.cardNumber;
+        person.slug = command.slug;
+        if (personfound) {
+            await this.personLecturaRepo.update(personfound, person);
+            return;
+        }
+        await this.personLecturaRepo.insert(person);
     }
 }

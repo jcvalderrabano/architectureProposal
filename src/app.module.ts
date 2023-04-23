@@ -5,6 +5,7 @@ import { PersonModule } from './person/person.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PersonLectura } from './person/entities/personLectura.entity';
 import { PersonEscritura } from './person/entities/personEscritura.entity';
+import { PaymentMethodEscritura } from './person/entities/paymentMethod.entity';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { PersonEscritura } from './person/entities/personEscritura.entity';
       username: 'root',
       password: '123456',
       database: 'Dummy',
-      entities: [PersonLectura, PersonEscritura],
+      entities: [PersonLectura, PersonEscritura, PaymentMethodEscritura],
       //entities: ['**/*.entity{.ts,.js}'],
       migrationsTableName: 'migration',
       migrations: ['src/migration/*.ts'],

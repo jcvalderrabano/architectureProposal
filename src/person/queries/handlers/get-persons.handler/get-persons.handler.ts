@@ -10,7 +10,6 @@ export class GetPersonsHandler implements IQueryHandler<GetPersonsQuery> {
     @InjectRepository(PersonLectura) private personRepo: Repository<PersonLectura>,
   ) {}
   async execute(query: GetPersonsQuery): Promise<PersonLectura[]> {
-    console.log('lectura');
     return await this.personRepo.find();
   }
 }
